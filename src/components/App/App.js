@@ -30,7 +30,11 @@ class App extends Component {
   handleFilterChange = e => {
     this.setState({ filter: e.currentTarget.value });
     console.log(e.currentTarget.value);
-  };
+    };
+    
+    componentDidMount() {
+        console.log(componentDidMount);
+    }
 
   render() {
     const normalizedFilter = this.state.filter.toLowerCase();
