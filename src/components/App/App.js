@@ -15,7 +15,7 @@ class App extends Component {
     if (contacts.find(contact => contact.name === values.name)) {
       return alert(`${values.name} is already in contact`);
     }
-    
+
     this.setState(prevState => ({
       contacts: [...prevState.contacts, values],
     }));
@@ -30,17 +30,29 @@ class App extends Component {
   handleFilterChange = e => {
     this.setState({ filter: e.currentTarget.value });
     console.log(e.currentTarget.value);
+  };
+
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+        const parsedContacts = JSON.parse(contacts);
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
     };
-    
-   
+  };
+
+  componentDidUpdate(_, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+  };
+  };
 
   render() {
     const normalizedFilter = this.state.filter.toLowerCase();
-console.log(this.state.contacts);
+    console.log(this.state.contacts);
     const visibleContacts = this.state.contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
-console.log(visibleContacts);
+    console.log(visibleContacts);
     return (
       <Contain>
         <PhoneBook>Phonebook</PhoneBook>
