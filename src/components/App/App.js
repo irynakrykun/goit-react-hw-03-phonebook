@@ -32,9 +32,7 @@ class App extends Component {
     console.log(e.currentTarget.value);
     };
     
-    componentDidMount() {
-        console.log(componentDidMount);
-    }
+   
 
   render() {
     const normalizedFilter = this.state.filter.toLowerCase();
